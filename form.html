@@ -1,0 +1,76 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>TF EE food order</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 1.33" />
+	<script src="jquery-3.6.0.min.js"></script>
+	<style>
+	
+	</style>
+</head>
+
+<body>
+	<form action="/formHandlerServlet" method="post">
+		<table id="table">
+			<tr id="ID" style="margin-bottom: 200px;">
+				<td><input id="name" placeholder="Name"></td>
+				<td><select id="location"><option value="TF">TF</option><option value="EE">EE</option></select></td>
+			</tr>
+		
+			<tr>
+				<td class="item"><input id="item"  placeholder="Item"></td>
+				<td><select id="unit" class="unit" placeholder="Unit"><option value="$">$</option><option value="lbs">lbs</option><option value="u">u</option></select></td>
+				<td><input id="amount" class="amount" type="number" placeholder="Amount"></td>
+				<td><button id="addItem" onclick="addItem(table, item, unit, amount)">Add item</button></td>
+			</tr>
+		</table>
+		<input type="submit">Submit</button>
+	</form>
+	
+	<script>
+		
+		function addItem(table, itemElement, unitElement, amountElement) {
+			if (!isValid (itemElement, amountElement)) return;
+			
+			const tableRow = document.createElement("tr");
+			
+			const itemCell = document.createElement("td");
+			const itemLabel = document.createElement("label");
+			itemLabel.innerHTML = itemElement.value;
+			itemCell.appendChild(itemLabel);
+			itemElement.value = "";
+			
+			const unitCell = document.createElement("td");
+			const unitLabel = document.createElement("label");
+			unitLabel.innerHTML = unitElement.value;
+			unitCell.appendChild(unitLabel);
+			
+			const amountCell = document.createElement("td");
+			const amountInput = document.createElement("input");
+			amountCell.appendChild(amountInput);
+			amountInput.value = amountElement.value;
+			amountElement.value = "";
+						
+			const newRow = table.insertRow(table.rows.length);
+			newRow.appendChild(itemCell);
+			newRow.appendChild(unitCell);
+			newRow.appendChild(amountCell);
+			
+			sortTable(table);
+		}
+		
+		function isValid (itemElement, amountElement) {
+			return itemElement.value != "" && amountElement.value > 0;
+		}
+		
+		function sortTable(table) {
+			
+		}
+	</script>
+</body>
+
+</html>
